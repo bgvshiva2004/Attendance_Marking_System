@@ -56,7 +56,7 @@ The students' attendance present in the input image is marked as 'present' and f
 * User, after uploading the class image, the faces of the students present in the image are recognised through comparision with the (embeddings extracted from the) pre exisiting database and their attendance is marked 'present'.
 ### Downloadable Attendance in csv (excel) format
 * The attendance computed from the model in the backend, is stored in a csv file where the corresponding attendance slot of the students present is marked as '1' whil the absentees' as '0'.
-
+![Download_Page](./Download_Page.png)
 
 
 
