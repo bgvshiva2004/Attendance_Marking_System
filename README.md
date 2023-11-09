@@ -4,7 +4,7 @@ Attendance Marking System via ML face recognition modules/libraries
 The prime intutiton behind developing this project is to save the minutes in the lecture hours or other relevant activities in educational institutions, during the process of noting the attendance of students.
 
 #### Run the project in local environment 
-Clone the github repository through the following command : https://github.com/bgvshiva2004/Attendance_Marking_System.git
+Clone the github repository through the following command : ``` git clone https://github.com/bgvshiva2004/Attendance_Marking_System.git ```
 
 ## Team 
 * B.G.V.Shiva   : 220002029 / CSE / IIT INDORE
