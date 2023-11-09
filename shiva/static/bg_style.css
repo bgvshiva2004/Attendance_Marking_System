@@ -1,0 +1,8 @@
+body{
+    background: url('/static/bg.jpg');
+    /* filter: brightness(0.8); */
+    background-size: cover;
+}
+h5{
+    color: #fff;
+}

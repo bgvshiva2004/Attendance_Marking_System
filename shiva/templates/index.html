@@ -1,0 +1,341 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'bg_style.css' %}">
+    <title>Attendance</title> 
+    <style>
+      :root{
+        --main-color: #fff;
+        --secondary-color: rgb(34,122,191);
+      }
+  
+      .body{
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 50%;
+        margin: 0px auto;
+      }
+
+      .body .d1{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .body .d1 img{
+        height: 30vh;
+        animation: img 0.5s linear forwards;
+      }
+
+      @keyframes img{
+        0%{
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        50%{
+          opacity: 0.5;
+          transform: translateY(50px);
+        }
+        100%{
+          opacity: 1;
+          transform: translateY(0px);
+        }
+      }
+  
+      .body .d1 h2{
+        color: var(--secondary-color);
+        margin-bottom: 30px;
+        animation: h2 0.5s linear forwards;
+        font-size: 30px;
+        text-align: center;
+      }
+  
+      @keyframes h2{
+        0%{
+          opacity: 0;
+          transform: translateY(100px);
+        }
+        50%{
+          opacity: 0.5;
+          transform: translateY(50px);
+        }
+        100%{
+          opacity: 1;
+          transform: translateY(0px);
+        }
+      }
+
+      @media (max-width: 675px){
+        .body .d1 img{
+          height: 20vh;
+        }
+      }
+  
+      .body button{
+          height: 50px;
+          font-size: 20px;
+          padding: 10px;
+          margin: 30px 0px;
+          width: 150px;
+          cursor: pointer;
+          border: 0;
+          outline: none;
+          border-radius: 30px;
+          background-color: #fff;
+          color: var(--secondary-color);
+          font-weight: 400;
+          transition: 0.3s ease-in-out;
+          position: relative;
+          box-shadow: 6px 6px 1px -1px rgba(0, 0, 0, 0.15),
+                      -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+      }
+  
+      .body button:hover{
+          color: #fff;
+          box-shadow: 6px 6px 1px -1px rgba(72,68,163,0.2),
+                      -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+          z-index: 2;
+      }
+  
+      .body button:hover::before{
+          content: '';
+          height: 100%;
+          position: absolute;
+          width: 100%;
+          left: 0px;
+          top: 0px;
+          background-color: var(--secondary-color);
+          color: #fff;
+          animation: btn 0.3s linear forwards;
+          border-radius: 30px;
+          opacity: 1;
+          z-index: -2;
+      }
+  
+      @keyframes btn{
+          0%{
+              width: 0%;
+          }
+          50%{
+              width: 50%;
+          }
+          100%{
+              width: 100%;
+          }
+      }
+
+      .fa-solid.fa-user{
+        margin-right: 5px;
+      }
+  
+      @media (max-width: 750px){
+        body{
+          height: 100%;
+        }
+  
+        .body{
+          flex-direction: column;
+          width: 100vw;
+          padding: 30px;
+          text-align: center; 
+        }
+      }
+    #message-container {
+        position: relative;
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        margin-left:150px;
+        overflow: hidden;
+        width: 50%;
+    }
+    
+    #loading-bar {
+        position: absolute;
+        bottom: 0;
+        left: 100%;
+        width: 100%;
+        height: 3px; /* Set the height of the loading bar */
+        background: #0074d9; /* Set the loading bar color */
+        z-index: 1;
+        {% comment %} transition: left 5s ease-in; {% endcomment %}
+    }
+    
+    #message-content {
+        z-index: 2;
+    }
+    
+    .message {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: #fff;
+        margin-bottom: 10px;
+    }
+    </style>
+</head>
+<body>
+      <div class="navbar1">
+        <div class="title">
+          <a href="{% url "home.html" %}" class="lo">
+            <img src="{% static "IITI_Logo.png" %}" class="logo">
+            <h3>IIT Indore</h3>
+          </a>
+      </div>
+          <div class="links">
+              <ul>
+                  <li><a href="{% url "home.html" %}" class="active">Home</a></li>
+                  <li><a style='cursor: pointer;'>Departments</a></li>
+                  <li><a style='cursor: pointer;'>Courses</a></li>
+                  <li><a href="{% url "review.html" %}">Review Attendance</a></li>
+                  <li><a href="{% url "login.html" %}">Logout</a></li>
+              </ul>
+          </div>
+      </div>
+  
+      <div class="navbar2">
+          <div class="ham">
+            <p><i class="fa-solid fa-bars"></i></p>
+          </div>
+          <div class="title">
+            <a href="{% url "home.html" %}" class="lo">
+              <img src="{% static "IITI_Logo.png" %}" class="logo">
+              <h3>IIT Indore</h3>
+            </a>
+        </div>
+        </div>
+        <div class="side-bar">
+          <div id="close"><i class="fa-solid fa-xmark"></i></div>
+          <ul>
+            <li><a href="{% url "home.html" %}" class="active">Home</a></li>
+            <li><a style='cursor: pointer;'>Departments</a></li>
+            <li><a style='cursor: pointer;'>Courses</a></li>
+            <li><a style='cursor: pointer;'>Review Attendance</a></li>
+            <li><a href="#about">Login</a></li>
+          </ul>
+        </div>
+
+        {% for msg in messages %}
+        <div id="message-container">
+            <div id="loading-bar"></div>
+            <div id="message-content">
+            
+                <div class="message">{{ msg }}</div>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+        <div class="w-full max-w-sm p-4 border border-blue-100 rounded-lg shadow-lg sm:p-6 md:p-8 mx-auto my-10" style="backdrop-filter: blur(10px);">
+          <form class="space-y-6" action="/index/" method="post" enctype="multipart/form-data" >
+            {% csrf_token %}
+            {{form.as_p}}
+              <h5 class="text-xl font-medium text-gray-900 dark:text-black">Mark the Attendance!</h5>
+              
+              <div>
+                    <label for="year" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Year</label>
+                    <select name="year" id="year" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-black">
+                      <option Value="None">Select</option>
+                      <option value="B.Tech I">B.Tech I</option>
+                      <option value="B.Tech II">B.Tech II</option>
+                      <option value="B.Tech III">B.Tech III</option>
+                      <option value="B.Tech IV">B.Tech IV</option>
+                      <option value="M.Tech I">M.Tech I</option>
+                      <option value="M.Tech II">M.Tech II</option> 
+                    </select>
+              </div>
+              <div>
+                <label for="dept" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Department</label>
+                <select name="department" id="department" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-black">
+                  <option Value="None">Select</option>
+                  <option value="CSE">Computer Science Engineering</option>
+                  <option value="MnC">Mathematics and Computing Science Engineering</option>
+                  <option value="EE">Electrical Engineering</option>
+                  <option value="SE">Space Science Engieering</option>
+                  <option value="EP">Engieering Physics</option>
+                  <option value="ME">Mechanical Engineering</option>
+                  <option value="CE">Civil Engineering</option>
+                  <option value="ChE">Chemical Engineering</option>
+                  <option value="MEMS">Mettalurgical and Material Science Engineering</option>
+                </select>
+          </div>
+          <div>
+            <label for="course" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Course</label>
+            <select name="course" id="course" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-black">
+              <option Value="None">Select</option>
+              <option value="MA 205">MA 205</option>
+              <option value="CS 201">CS 201</option>
+              <option value="CS 203">CS 203</option>
+              <option value="CS 207">CS 207</option> 
+            </select>
+      </div>
+      <div>
+        <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Date</label>
+        <input type="date" name="date" id="date" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:placeholder-black dark:text-black" placeholder="name@company.com" required>
+    </div>
+              <div>
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Class-Image</label>
+                <input type="file" name="image" id="image" placeholder="Select Your Image" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:text-black" required>
+            </div>
+              <div class="flex items-start">
+                  <div class="flex items-start">
+                  </div>
+              </div>
+              <div class="flex justify-center ">
+                <button type="submit" class="text-white bg-[#1e90ff] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Process the Attendance</button>
+              </div>
+              
+            </form>
+          </div>
+        <footer>
+          <div class="footer">
+            <div class="info">
+              <h4>IIT Indore</h4>
+            </div>
+            <div class="social">
+              <ul>
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+              </ul>
+            </div>
+            <div class="rights">
+              <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+            </div>
+          </div>
+          
+        </footer>
+  
+        <script src="script.js"></script>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            var loadingBar = document.getElementById("loading-bar");
+            var messageContainer = document.getElementById("message-container");
+        
+            // Animate the loading bar
+            var width = 100;
+            var interval = setInterval(function () {
+                if (width <= 0) {
+                    clearInterval(interval);
+                    // Hide the message container
+                    messageContainer.style.display = "none";
+                } else {
+                    width -= 1;
+                    loadingBar.style.left = width + "%";
+                }
+            }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
+        });
+        </script>
+</body>
+</html>
